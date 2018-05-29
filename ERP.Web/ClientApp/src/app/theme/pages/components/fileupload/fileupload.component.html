@@ -1,0 +1,82 @@
+<!-- BEGIN: Subheader -->
+
+<div class="m-subheader" appunwraptag="">
+	<div class="d-flex align-items-center">
+		<div class="mr-auto">
+			<h3 class="m-subheader__title m-subheader__title--separator">
+				FileUpload
+			</h3>
+			<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+				<li class="m-nav__item m-nav__item--home">
+					<a href="#" class="m-nav__link m-nav__link--icon">
+						<i class="m-nav__link-icon la la-home"></i>
+					</a>
+				</li>
+				<li class="m-nav__separator">
+					-
+				</li>
+				<li class="m-nav__item">
+					<a href="" class="m-nav__link">
+						<span class="m-nav__link-text">
+							FileUpload
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+	<!--begin::Portlet-->
+	<div class="m-portlet">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						Dropzone File Upload Examples
+					</h3>
+				</div>
+			</div>
+		</div>
+		<!--begin::Form-->
+		<form class="m-form m-form--fit m-form--label-align-right">
+			<div class="m-portlet__body">
+
+				<div class="form-group m-form__group row">
+					<label class="col-form-label col-lg-3 col-sm-12">
+						File Type Validation
+					</label>
+					<div class="col-lg-4 col-md-9 col-sm-12">
+						<div class="m-dropzone dropzone m-dropzone--success" action="api/upload" id="m-dropzone-three">
+							<div class="m-dropzone__msg dz-message needsclick">
+
+								<h3 class="m-dropzone__msg-title">
+									Drop files here or click to upload.
+								</h3>
+								<span class="m-dropzone__msg-desc">
+									Only image, pdf and psd files are allowed for upload
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</form>
+		<!--end::Form-->
+	</div>
+	<!--end::Portlet-->
+</div>
+
+<!--<h1>File Upload Using Angular 5 and ASP.NET Core 2.1</h1>
+<input #file type="file" multiple (change)="upload(file.files)" />
+<br />
+<span style="font-weight:bold;color:green;" *ngIf="progress > 0 && progress < 100">
+	{{progress}}%
+</span>
+
+<span style="font-weight:bold;color:green;" *ngIf="message">
+	{{message}}
+</span>-->

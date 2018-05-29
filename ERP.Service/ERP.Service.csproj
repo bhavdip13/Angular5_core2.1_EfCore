@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ERP.Repository\ERP.Repository.csproj" />
+    <ProjectReference Include="..\ERP.ViewModels\ERP.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

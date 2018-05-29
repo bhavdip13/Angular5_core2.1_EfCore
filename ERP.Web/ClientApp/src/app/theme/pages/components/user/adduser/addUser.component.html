@@ -1,0 +1,91 @@
+﻿<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">
+                {{ title }} User
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">
+                    -
+                </li>
+                <li class="m-nav__item">
+                    <span class="m-nav__link-text">
+                        {{ title }} User
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet">
+                <!--begin::Form-->
+                <form [formGroup]="userForm" (ngSubmit)="save()" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="m_form_1">
+                    <div class="m-portlet__body">
+                        <input type="hidden" formControlName="id">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-6">
+                                <label>
+                                    FullName
+                                </label>
+                                <input type="text" class="form-control m-input" placeholder="Enter FullName" formControlName="fullName">
+                               
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="">
+                                    Password
+                                </label>
+                                <input type="password" class="form-control m-input" placeholder="Enter Password" formControlName="password">
+                               
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-6">
+                                <label>
+                                    Email
+                                </label>
+                                <input type="email" class="form-control m-input" placeholder="Enter Email" formControlName="email">
+                              
+                            </div>
+                            <!--<div class="col-lg-6">
+                                <label class="">
+                                    Employee
+                                </label>
+                                <input type="text" class="form-control m-input" placeholder="Enter Employee" formControlName="employeeid">
+                                <span class="m-form__help">
+                                    Please enter Employee
+                                </span>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions--solid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button type="submit" [disabled]="!userForm.valid" class="btn m-btn--square btn-primary btn-sm">
+                                        {{title}} User
+                                    </button>
+                                    <button type="reset" class="btn m-btn--square btn-secondary btn-sm">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+    </div>
+</div>
