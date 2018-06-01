@@ -78,7 +78,8 @@ export class LoginCustom {
     static handleSignUpFormSubmit() {
         $('#m_login_signup_submit').click((e) => {
             let btn = $(e.target);
-            let form = $(e.target).closest('form');
+          let form = $(e.target).closest('form');
+          
             form.validate({
                 rules: {
                     fullname: {
@@ -91,12 +92,15 @@ export class LoginCustom {
                     password: {
                         required: true,
                     },
-                    rpassword: {
-                        required: true,
+                  rpassword: {
+                    required: true,
+                      //equalTo: "#password"
+                     
                     },
                     agree: {
                         required: true,
-                    },
+                  },
+                 
                 },
             });
             if (!form.valid()) {

@@ -1,5 +1,6 @@
 ﻿using ERP.Data.Models;
 using ERP.Service.Interfaces;
+using ERP.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,10 +43,24 @@ namespace ERP.Web.Controllers
 			}
 		}
 		[HttpPost]// insert recored
-		public Users Post([FromBody] Users _Users)
+		public Users Post([FromBody] VUsers _VUsers)
 		{
+			var _Users = new Users();
 			try
 			{
+				_Users.Id = _VUsers.Id;
+				_Users.Email = _VUsers.Email;
+				_Users.EmailConfirmed =false;
+				_Users.PhoneNumber = "";
+				_Users.LastLoginDateUtc = _VUsers.LastLoginDateUtc;
+				_Users.Active = _VUsers.Active;
+				_Users.CreatedOnUtc = DateTime.UtcNow;
+				_Users.FullName = _VUsers.FullName;
+				_Users.ProfilePicBinary = _VUsers.ProfilePicBinary;
+				_Users.MimeType = "";
+
+				
+				_Users.Password= System.Text.Encoding.ASCII.GetBytes(_VUsers.Password); 
 				service.AddUser(_Users);
 			}
 			catch (Exception ex)

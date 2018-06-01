@@ -22,7 +22,15 @@ export class AuthenticationService {
     //            }
     //        });
     //}
-
+  ValidateEmail(email) {  // you can use like  : this._authService.ValidateEmail(this.model.email);
+    let body = JSON.stringify({ 'email': email });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.myAppUrl + 'api/Authentication/ValidateEmail', body, options)
+      .map((response: Response) => {
+        res => res.json()
+      });
+  }
     login(email: string, password: string) {
 
         let body = JSON.stringify({ 'Email': email, "password": password });

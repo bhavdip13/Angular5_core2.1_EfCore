@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.Data.Models
 {
@@ -19,10 +17,7 @@ namespace ERP.Data.Models
         public int DisplayOrder { get; set; }
         public DateTime? UpdatedOnUtc { get; set; }
 
-        [ForeignKey("CustomerId")]
-        [InverseProperty("Inquirys")]
         public Customers Customer { get; set; }
-        [InverseProperty("Inquiry")]
         public ICollection<InquiryProductMappings> InquiryProductMappings { get; set; }
     }
 }

@@ -14,7 +14,9 @@ export class HeaderNavComponent implements OnInit, AfterViewInit {
 
     }
     ngOnInit() {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      debugger;
+      console.log(this.currentUser);
     }
     ngAfterViewInit() {
 

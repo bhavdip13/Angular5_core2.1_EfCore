@@ -1,4 +1,4 @@
-﻿<!-- BEGIN: Subheader -->
+<!-- BEGIN: Subheader -->
 <div class="m-subheader" appunwraptag="">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
@@ -31,58 +31,107 @@
             <div class="m-portlet">
                 <!--begin::Form-->
                 <form [formGroup]="userForm" (ngSubmit)="save()" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="m_form_1">
-                    <div class="m-portlet__body">
-                        <input type="hidden" formControlName="id">
-                        <div class="form-group m-form__group row">
-                            <div class="col-lg-6">
-                                <label>
-                                    FullName
-                                </label>
-                                <input type="text" class="form-control m-input" placeholder="Enter FullName" formControlName="fullName">
-                               
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="">
-                                    Password
-                                </label>
-                                <input type="password" class="form-control m-input" placeholder="Enter Password" formControlName="password">
-                               
-                            </div>
+                  <div class="m-portlet__body">
+                    <input type="hidden" formControlName="id">
+                    <div class="form-group m-form__group row">
+
+                      <label class="col-11 col-form-label" style="float:right">
+                        Is Email Verified
+                      </label>
+                      <div class="col-1" style="float:right">
+                        <span class="m-switch m-switch--icon-check">
+                          <label>
+                            <input type="checkbox" name="">
+                            <span></span>
+                          </label>
+                        </span>
+                      </div>
+                      <label class="col-11 col-form-label" style="float:right">
+                        Is Active
+                      </label>
+                      <div class="col-1" style="float:right">
+                        <span class="m-switch m-switch--icon-check">
+                          <label>
+                            <input type="checkbox" name="">
+                            <span></span>
+                          </label>
+                        </span>
+                      </div>
+                    </div>
+                      <div class="form-group m-form__group row">
+
+                        <div class="col-lg-6">
+                          <label>
+                            FullName
+                          </label>
+                          <input type="text" class="form-control m-input" placeholder="Enter FullName" formControlName="fullName">
+
                         </div>
-                        <div class="form-group m-form__group row">
-                            <div class="col-lg-6">
-                                <label>
-                                    Email
-                                </label>
-                                <input type="email" class="form-control m-input" placeholder="Enter Email" formControlName="email">
-                              
-                            </div>
-                            <!--<div class="col-lg-6">
-                                <label class="">
-                                    Employee
-                                </label>
-                                <input type="text" class="form-control m-input" placeholder="Enter Employee" formControlName="employeeid">
-                                <span class="m-form__help">
-                                    Please enter Employee
-                                </span>
-                            </div>-->
+                        <div class="col-lg-6">
+                          <label class="">
+                            UserName
+                          </label>
+                          <input type="text" class="form-control m-input" placeholder="Enter Unique Username" formControlName="username">
+
                         </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+
+                        <div class="col-lg-6">
+                          <label class="">
+                            Mobile
+                          </label>
+                          <input type="text" class="form-control m-input" placeholder="Enter Mobile" formControlName="mobile">
+
+                        </div>
+                        <div class="col-lg-6 col-md-9 col-sm-12">
+                          <div class="m-dropzone dropzone m-dropzone--success" action="api/upload" id="m-dropzone-three">
+                            <div class="m-dropzone__msg dz-message needsclick">
+
+                              <h3 class="m-dropzone__msg-title">
+                                Drop files here or click to upload.
+                              </h3>
+                              <span class="m-dropzone__msg-desc">
+                                Only image are allowed for upload
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                          <label>
+                            Email
+                          </label>
+                          <input type="email" class="form-control m-input" placeholder="Enter Email" formControlName="email">
+
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="">
+                            Password
+                          </label>
+                          <input type="password" class="form-control m-input" placeholder="Enter Password" formControlName="password">
+
+                        </div>
+                      </div>
                     </div>
                     <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-                        <div class="m-form__actions m-form__actions--solid">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <button type="submit" [disabled]="!userForm.valid" class="btn m-btn--square btn-primary btn-sm">
-                                        {{title}} User
-                                    </button>
-                                    <button type="reset" class="btn m-btn--square btn-secondary btn-sm">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
+                      <div class="m-form__actions m-form__actions--solid">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <button type="submit" [disabled]="!userForm.valid" class="btn m-btn--square btn-primary btn-sm">
+                              {{title}} User
+                            </button>
+                            <button type="reset" class="btn m-btn--square btn-secondary btn-sm">
+                              Cancel
+                            </button>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </form>
+</form>
                 <!--end::Form-->
             </div>
             <!--end::Portlet-->

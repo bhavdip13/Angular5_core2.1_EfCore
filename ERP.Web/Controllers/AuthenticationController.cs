@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ERP.Data.Models;
 using ERP.Service.Interfaces;
+using ERP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,18 +37,21 @@ namespace ERP.Web.Controllers.API
 		}
 		
 		[Route("api/Authentication/Login")]
-		public IActionResult Authenticate([FromBody]Users userDto)
+		public IActionResult Authenticate([FromBody]VUsers userDto)
 		{
-			var user = _context.Users.FirstOrDefaultAsync(a => a.Email == userDto.Email && a.Password == userDto.Password).Result;
+			var _Users = new Users();
+			_Users.LastLoginDateUtc = DateTime.UtcNow;
+			_Users.Password = System.Text.Encoding.ASCII.GetBytes(userDto.Password);
+			var user = _context.Users.FirstOrDefaultAsync(a => a.Email == userDto.Email && a.Password == _Users.Password).Result;
 
-			//List<MenuList> MenuList = new List<MenuList>();
-			//List<ModuleList> ModuleList = new List<ModuleList>();
+			List<MstMenuList> MenuList = new List<MstMenuList>();
+			List<MstModuleList> ModuleList = new List<MstModuleList>();
 
-			//if (user != null)
-			//{
-			//	MenuList =  _context.GetMenuList(user.Id);//pass userid for the get menu list from paricular user.
-			//	ModuleList =  _context.GetModuleList();
-			//}
+			if (user != null)
+			{
+				MenuList = _context.MstMenuList.Where(t=>t.UserId== user.Id).ToList();//pass userid for the get menu list from paricular user.
+				ModuleList = _context.MstModuleList.ToList();
+			}
 
 			if (user == null)
 				return Unauthorized();
@@ -75,8 +79,8 @@ namespace ERP.Web.Controllers.API
 				FullName = user.FullName,
 				Email = user.Email,
 				Token = new JwtSecurityTokenHandler().WriteToken(token),
-				//ModuleList = ModuleList,
-				//MenuList = MenuList
+				ModuleList = ModuleList,
+				MenuList = MenuList
 			});
 		}
 	}

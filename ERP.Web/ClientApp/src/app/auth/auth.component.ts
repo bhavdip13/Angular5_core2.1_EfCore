@@ -74,10 +74,10 @@ export class AuthComponent implements OnInit {
             });
     }
 
-    signup() {
-        this.loading = true;
+  signup() {
 
-        this._userService.Create(this.model).subscribe(
+        this.loading = true;
+          this._userService.Create(this.model).subscribe(
             data => {
                 this.showAlert('alertSignin');
                 this._alertService.success(
@@ -93,7 +93,7 @@ export class AuthComponent implements OnInit {
                 this.loading = false;
             });
     }
-
+  
     //forgotPass() {
     //    this.loading = true;
     //    this._userService.forgotPassword(this.model.email).subscribe(

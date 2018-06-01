@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.Data.Models
 {
@@ -13,10 +11,8 @@ namespace ERP.Data.Models
         }
 
         public int Id { get; set; }
-        [StringLength(400)]
         public string Name { get; set; }
 
-        [InverseProperty("ProductTag")]
         public ICollection<ProductProductTagMappings> ProductProductTagMappings { get; set; }
     }
 }

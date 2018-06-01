@@ -18,7 +18,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
 
     }
     ngOnInit() {
-       // this.bindMenu();
+        this.bindMenu();
     }
     ngAfterViewInit() {
 
