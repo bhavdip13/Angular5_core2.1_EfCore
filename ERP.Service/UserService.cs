@@ -10,6 +10,7 @@ namespace ERP.Service
 	public class UserService : IUserService
 	{
 		private IRepository<Users> repository;
+		ERPContext db = new ERPContext();
 		public UserService(IRepository<Users> repository)
 		{
 			this.repository = repository;
@@ -26,13 +27,29 @@ namespace ERP.Service
 		{
 			repository.Add(user);
 		}
-		public void DeleteUser(Users user)
+		public int DeleteUser(Users user)
 		{
-			repository.Remove(user);
+			return repository.Remove(user);
 		}
 		public void UpdateUser(Users user)
 		{
 			repository.Update(user);
+		}
+		public void UpdateIsActive(int id,bool active)
+		{
+			
+			var userlist = db.Users.Find(id);
+			userlist.Active = active;
+			db.Update(userlist);
+			db.SaveChanges();
+		}
+		public void UpdateIsEmailVerified(int id, bool IsEmailVerified)
+		{
+
+			var userlist = db.Users.Find(id);
+			userlist.EmailConfirmed = IsEmailVerified;
+			db.Update(userlist);
+			db.SaveChanges();
 		}
 	}
 }

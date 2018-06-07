@@ -8,17 +8,19 @@ using System.Collections.Generic;
 
 namespace ERP.Web.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/[controller]")]
-    public class UserController : Controller
-    {
+	[Produces("application/json")]
+	[Route("api/User")]
+	public class UserController : Controller
+	{
 		private readonly IUserService service;
 
 		public UserController(IUserService service)
 		{
 			this.service = service;
 		}
-		[HttpGet]//get all recored
+		// Get Users List
+		[Route("GetUsers")]
+		[HttpGet]
 		public IEnumerable<Users> Get()
 		{
 			try
@@ -30,7 +32,9 @@ namespace ERP.Web.Controllers
 				throw ex;
 			}
 		}
-		[HttpGet("{id}")]//get recored by id
+		// Get User by Id
+		[Route("Details")]
+		[HttpGet]
 		public Users Get(int id)
 		{
 			try
@@ -42,7 +46,9 @@ namespace ERP.Web.Controllers
 				throw ex;
 			}
 		}
-		[HttpPost]// insert recored
+		// Save and Update User
+		[Route("SaveUser")]
+		[HttpPost]
 		public Users Post([FromBody] VUsers _VUsers)
 		{
 			var _Users = new Users();
@@ -50,18 +56,29 @@ namespace ERP.Web.Controllers
 			{
 				_Users.Id = _VUsers.Id;
 				_Users.Email = _VUsers.Email;
-				_Users.EmailConfirmed =false;
-				_Users.PhoneNumber = "";
-				_Users.LastLoginDateUtc = _VUsers.LastLoginDateUtc;
+				_Users.UserName = _VUsers.UserName;
+				_Users.EmailConfirmed = _VUsers.EmailConfirmed;
+				_Users.PhoneNumber = _VUsers.PhoneNumber;
+				_Users.LastLoginDateUtc = DateTime.UtcNow;
 				_Users.Active = _VUsers.Active;
 				_Users.CreatedOnUtc = DateTime.UtcNow;
 				_Users.FullName = _VUsers.FullName;
-				_Users.ProfilePicBinary = _VUsers.ProfilePicBinary;
-				_Users.MimeType = "";
+				if (_VUsers.ProfilePicBinary != null)
+				{
+					_Users.ProfilePicBinary = _VUsers.ProfilePicBinary;
 
-				
-				_Users.Password= System.Text.Encoding.ASCII.GetBytes(_VUsers.Password); 
-				service.AddUser(_Users);
+				}
+				_Users.MimeType = _VUsers.MimeType;
+
+				_Users.Password = System.Text.Encoding.ASCII.GetBytes(_VUsers.Password);
+				if (_Users.Id == 0)
+				{
+					service.AddUser(_Users);
+				}
+				else
+				{
+					service.UpdateUser(_Users);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -69,32 +86,38 @@ namespace ERP.Web.Controllers
 			}
 			return _Users;
 		}
+		// Update Isactive
+		[Route("UpdateIsActive")]
+		[HttpPost]
+		public void UpdateisActive(int id,bool active)
+		{
+			
+			service.UpdateIsActive(id,active);
+				
+		}
+		// Update IsEmailVerified
+		[Route("UpdateIsEmailVerified")]
+		[HttpPost]
+		public void UpadeteIsEmailVerified(int id, bool IsEmailVerified)
+		{
 
-		[HttpDelete("{id}")] //delete recored by id
-		public void Delete(int id)
+			service.UpdateIsEmailVerified(id, IsEmailVerified);
+
+		}
+		[Route("Delete")]
+		[HttpDelete]
+		public int Delete(int id)
 		{
 			try
 			{
 				Users User = service.GetUser(id);
-				service.DeleteUser(User);
+				return service.DeleteUser(User);
 			}
 			catch (Exception ex)
 			{
 				throw ex;
 			}
 		}
-		//[HttpPost]//update recored
-		//public void Put(Users _Users)
-		//{
-		//	try
-		//	{
-		//		service.UpdateUser(_Users);
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		throw ex;
-		//	}
-			
-		//}
+	
 	}
 }

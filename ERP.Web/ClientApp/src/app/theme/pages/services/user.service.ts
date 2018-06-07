@@ -14,27 +14,31 @@ export class UserService {
         this.myAppUrl = baseUrl;
     }
     getUsers() {
-        return this._http.get(this.myAppUrl + 'api/Users/GetUsers', this.jwt()).map((response: Response) => response.json());
+        return this._http.get(this.myAppUrl + 'api/User/GetUsers', this.jwt()).map((response: Response) => response.json());
     }
    
     getUserById(id: number) {
-        return this._http.get(this.myAppUrl + "api/Users/Details?id=" + id, this.jwt()).map((response: Response) => response.json());
+        return this._http.get(this.myAppUrl + "api/User/Details?id=" + id, this.jwt()).map((response: Response) => response.json());
     }
     saveUser(user: User) {
-        debugger;
-        return this._http.post(this.myAppUrl + '/api/Users/SaveUser', user, this.jwt()).map((response: Response) => response.json());
+        return this._http.post(this.myAppUrl + 'api/User/SaveUser', user, this.jwt()).map((response: Response) => response.json());
 
     }
     create(user: User) {
 
-        return this._http.post(this.myAppUrl + '/api/users', user, this.jwt()).map((response: Response) => response.json());
-    }
-    //update(user: User) {
-    //    return this._http.put(this.myAppUrl + '/api/Users/Update' + user.id, driverinformation, this.jwt());
-    //}
+      return this._http.post(this.myAppUrl + 'api/user/SaveUser', user, this.jwt()).map((response: Response) => response.json());
+  }
+  UpdateIsActive(id: number, active: boolean) {
+    return this._http.post(this.myAppUrl + 'api/User/UpdateIsEmailVerified', { params: { id: id, active: active } } , this.jwt()).map((response: Response) => response.json());
+
+  }
+  UpdateIsEmailVerified(id: number, IsEmailVerified: boolean) {
+    return this._http.post(this.myAppUrl + 'api/User/UpdateIsEmailVerified', { params: { id: id, IsEmailVerified: IsEmailVerified } }, this.jwt()).map((response: Response) => response.json());
+
+  }
 
     deleteUser(id) {
-        return this._http.delete(this.myAppUrl + "api/Users/" + id)
+      return this._http.delete(this.myAppUrl + "api/User/Delete?id=" + id)
             .map((response: Response) => response.json())
             .catch(this.errorHandler);
     }

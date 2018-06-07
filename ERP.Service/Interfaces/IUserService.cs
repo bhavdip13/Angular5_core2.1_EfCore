@@ -11,6 +11,8 @@ namespace ERP.Service.Interfaces
 		Users GetUser(int id);
 		void AddUser(Users user);
 		void UpdateUser(Users user);
-   	void DeleteUser(Users user);
+   	int DeleteUser(Users user);
+		void UpdateIsActive(int id, bool active);
+		void UpdateIsEmailVerified(int id, bool IsEmailVerified);
 	}
 }

@@ -10,7 +10,7 @@ namespace ERP.IRepository.Interfaces
         void AddRange(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         void UpdateRange(IEnumerable<TEntity> entities);
-        void Remove(TEntity entity);
+        int Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
         int Count();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);

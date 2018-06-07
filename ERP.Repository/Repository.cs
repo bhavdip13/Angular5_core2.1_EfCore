@@ -60,14 +60,14 @@ namespace ERP.IRepository
             return _entities.SingleOrDefault(predicate);
         }
 
-        public void Remove(TEntity entity)
+        public int Remove(TEntity entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             _entities.Remove(entity);
-            _context.SaveChanges();
+           return _context.SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

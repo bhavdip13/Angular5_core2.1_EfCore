@@ -22,7 +22,7 @@ export class UserService {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });//option used becouse error 415 for the response type not match. (JWT token)
-        return this._http.post(this.myAppUrl + 'api/user', user, options).map((response: Response) => response.json());
+      return this._http.post(this.myAppUrl + 'api/user/SaveUser', user, options).map((response: Response) => response.json());
     }
 
 

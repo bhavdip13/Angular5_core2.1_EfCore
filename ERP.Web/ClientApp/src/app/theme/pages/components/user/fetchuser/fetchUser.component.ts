@@ -1,4 +1,4 @@
-﻿import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user.service'
@@ -14,6 +14,7 @@ declare var $: any;
     encapsulation: ViewEncapsulation.None
 })
 export class FetchUserComponent {
+    
     public userList: UserData[];
     DefaultDataList: DefaultDataModel[];
     public tableWidget: any;
@@ -21,11 +22,16 @@ export class FetchUserComponent {
     index: number;
     user: User;
 
-    //constructor() {
-    //}
-
+    
     ngOnInit() {
     }
+  filter = false;
+
+  onFilterChange(eve: any) {
+    debugger;
+    alert('hi cool');
+    this.filter = !this.filter;
+  }
 
     constructor(public http: Http,
         private _router: Router,
@@ -43,7 +49,7 @@ export class FetchUserComponent {
                 console.log("DATA2", this.userList);
             })
     }
-
+  
     DefaultDatatableDemo(data): void {
 
         var options = {
@@ -94,36 +100,128 @@ export class FetchUserComponent {
                     width: 1,
                     display: "none"
                 },
+              {
+                width: 170,
+                field: 'profilepicbinary',
+                title: 'User',
+                template: function (data) {
+                 
+                  if (data.profilePicBinary != null) {
+                    data.profilePicBinary = 'data:image/jpg;base64,' + data.profilePicBinary;
+                    return '<div class="m-card-user m-card-user--sm">\
+								<div class="m-card-user__pic">\
+									<img src='+ data.profilePicBinary+' class="m--img-rounded m--marginless" alt="user photo">\
+								</div>\
+								<div class="m-card-user__details">\
+									<span class="m-card-user__name">' + data.fullName + '</span>\
+									<a class="m-card-user__email m-link">' +
+                      data.phoneNumber + '</a>\
+								</div>\
+							</div>';
+                  } else {
+                   
+                    var stateNo = Math.floor(Math.random() * (0 - 7 + 1)) + 7;
+                    var states = [
+                      'success',
+                      'brand',
+                      'danger',
+                      'accent',
+                      'warning',
+                      'metal',
+                      'primary',
+                      'info'];
+                    var state = states[stateNo];
+                    return  '<div class="m-card-user m-card-user--sm">\
+								<div class="m-card-user__pic">\
+										<div class="m-card-user__no-photo m--bg-fill-' + state +
+                      '"><span>' + data.userName.substring(0, 1) + '</span></div>\
+								</div>\
+								<div class="m-card-user__details">\
+									<span class="m-card-user__name">' + data.fullName + '</span>\
+									<a  class="m-card-user__email m-link">' +
+                      data.phoneNumber + '</a>\
+								</div>\
+							</div>';
+                  }
 
+                 
+                },
+              },
                 {
-                    field: "fullName",
-                    title: "Full Name",
-                    width: 150
+                  field: "userName",
+                    title: "UserName",
+                    width: 80
                 },
 
                 {
                     field: "email",
                     title: "Email",
                     width: 150,
-                    responsive: { visible: 'lg' }
+                  responsive: { visible: 'lg' },
+                     template: function (data) {
+                       return '<a class="m-link" href="mailto:' + data.email +
+                      '">' +
+                      data.email + '</a>';
+                  },
                 },
                 {
-                    field: "createdTime",
-                    title: "Created Time",
+                  field: "createdOnUtc",
+                    title: "Created Date",
                     width: 150,
                     sortable: 'desc',
-                    responsive: { visible: 'lg' },
-                    type: "date",
-                    format: "MM/DD/YY"
+                    type: 'date',
+                    format: 'MM/DD/YYYY',
                 },
-                {
-                    field: "updatedTime",
-                    title: "Updated Time",
-                    width: 150,
-                    responsive: { visible: 'lg' },
-                    type: "date",
-                    format: "MM/DD/YY"
-                }]
+                
+              //{
+              //  field: 'emailConfirmed',
+              //  title: 'Is Mail Verify',
+              //  // callback function support for column rendering
+              //  template: function (data) {
+                  
+              //    if (data.emailConfirmed == true) {
+              //      return '<span class="m-badge  m-badge--success m-badge--wide"> Yes </span>';
+              //    }
+              //    else {
+              //      return '<span class="m-badge  m-badge--danger m-badge--wide"> No </span>';
+              //    }
+                 
+              //  },
+              //},
+              {
+                field: 'emailConfirmed',
+                title: 'Is Mail Verify',
+                // callback function support for column rendering
+                template: function (data) {
+
+                  if (data.emailConfirmed == true) {
+                   
+                    return '<span class="m-switch m-switch--icon-check"><label><input type="checkbox" checked formControlName = "emailconfirmed" id="emailconfirmed"><span></span></label></span>'
+                  }
+                  else {
+                    return '<span class="m-switch m-switch--icon-check"><label><input type="checkbox"  formControlName = "emailconfirmed" id="emailconfirmed"><span></span></label></span>'
+
+                  }
+
+                },
+              },
+              {
+                field: 'active',
+                title: 'Is Active',
+                // callback function support for column rendering
+                template: function (data) {
+
+                  if (data.active == true) {
+                    return '<span class="m-switch m-switch--icon-check"><label><input type="checkbox" checked formControlName = "active" id="active" (chnage)="onFilterChange()"><span></span></label></span>'
+
+                  }
+                  else {
+                    return '<span class="m-switch m-switch--icon-check"><label><input type="checkbox"  formControlName = "active"  id="active" (change)="onFilterChange($event)"><span></span></label></span>'
+
+                  }
+
+                },
+              },]
         };
 
         $('.m_datatable').mDatatable('destroy');
@@ -160,6 +258,7 @@ export class FetchUserComponent {
             }
         });
 
+    
 
     }
 

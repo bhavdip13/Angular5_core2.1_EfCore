@@ -79,6 +79,8 @@ namespace ERP.Web.Controllers.API
 				FullName = user.FullName,
 				Email = user.Email,
 				Token = new JwtSecurityTokenHandler().WriteToken(token),
+				profilePicBinary = user.ProfilePicBinary,
+				UserName = user.UserName,
 				ModuleList = ModuleList,
 				MenuList = MenuList
 			});
